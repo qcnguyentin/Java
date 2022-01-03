@@ -8,5 +8,6 @@ public class Main {
 		pm.addProd();
 		pm.hienThi();
 		System.out.println("hello");
+		// menu ->
 	}
 }

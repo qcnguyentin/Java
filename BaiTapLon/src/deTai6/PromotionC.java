@@ -2,7 +2,7 @@ package deTai6;
 
 import java.util.Date;
 
-public class PromotionC {
+public class PromotionC extends Promotion{
 	private static int count;
 	private String id;
 	private Date onDate;
@@ -11,7 +11,13 @@ public class PromotionC {
 	{
 		id = (String.format("C%04d", ++count));
 	}
-
+	
+	public PromotionC(Date onDate, Date outDate) {
+		super();
+		this.onDate = onDate;
+		this.outDate = outDate;
+		
+	}
 	public String getId() {
 		return id;
 	}
@@ -30,5 +36,14 @@ public class PromotionC {
 
 	public void setOutDate(Date outDate) {
 		this.outDate = outDate;
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		System.out.println(this.id);
+		System.out.println(fm.format(this.onDate.getTime()));
+		System.out.println(fm.format(this.outDate.getTime()));
+		
 	}
 }
