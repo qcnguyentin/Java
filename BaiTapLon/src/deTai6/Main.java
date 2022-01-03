@@ -7,6 +7,6 @@ public class Main {
 		pm.addProd(p1);
 		pm.addProd();
 		pm.hienThi();
-		System.out.println("helo");
+		System.out.println("hello");
 	}
 }
