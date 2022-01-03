@@ -1,6 +1,7 @@
 package deTai6;
 
 import java.util.Date;
+import java.util.List;
 
 public class PromotionB extends Promotion{
 	private static int count = 999;
@@ -8,14 +9,16 @@ public class PromotionB extends Promotion{
 	private Date onDate;
 	private Date outDate;
 	
+	private List<TicketGift> listTicket;
 	{
 		id = (String.format("B%04d", ++count));
 	}
 	
-	public PromotionB(Date onDate, Date outDate) {
+	public PromotionB(Date onDate, Date outDate, List<TicketGift> listTicket) {
 		super();
 		this.onDate = onDate;
 		this.outDate = outDate;
+		this.listTicket = listTicket;
 		
 	}
 	public String getId() {
