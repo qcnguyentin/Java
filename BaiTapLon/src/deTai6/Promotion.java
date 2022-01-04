@@ -1,8 +1,7 @@
 package deTai6;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 abstract class Promotion {
@@ -15,13 +14,13 @@ abstract class Promotion {
 	
 	public abstract String getId() ;
 	
-	public abstract Date getOnDate();
+	public abstract GregorianCalendar getOnDate();
 	
-	public abstract void setOnDate(Date onDate);
+	public abstract void setOnDate(GregorianCalendar onDate);
 	
-	public abstract Date getOutDate();
+	public abstract GregorianCalendar getOutDate();
 	
-	public abstract void setOutDate(Date outDate);
+	public abstract void setOutDate(GregorianCalendar outDate);
 	
 	//gift -> ? void
 }

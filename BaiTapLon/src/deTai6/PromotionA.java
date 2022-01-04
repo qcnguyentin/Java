@@ -1,44 +1,44 @@
 package deTai6;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class PromotionA extends Promotion{
 	private static int count;
 	private String id;
-	private Date onDate;
-	private Date outDate;
-	// xem lai
-	private double pro_percent;
+	private GregorianCalendar onDate;
+	private GregorianCalendar outDate;
+	private int pro_percent;
 	{
 		id = (String.format("A%02d", ++count));
 	}
 	
-	public PromotionA(Date onDate, Date ouDate, double pro_percent) {
+	public PromotionA(String onDate, String outDate, int pro_percent) throws ParseException {
 		super();
-		this.onDate = onDate;
-		this.outDate = ouDate;
+		this.onDate = new GregorianCalendar();
+		this.onDate.setTime(fm.parse(onDate));
+		this.outDate = new GregorianCalendar();
+		this.outDate.setTime(fm.parse(outDate));
 		this.pro_percent = pro_percent;
 	}
 	public String getId() {
 		return id;
 	}
 
-	public Date getOnDate() {
-		return onDate;
+	public GregorianCalendar getOnDate() {
+		return this.onDate;
 	}
 
-	public void setOnDate(Date onDate) {
+	public void setOnDate(GregorianCalendar onDate) {
 		this.onDate = onDate;
 	}
 
-	public Date getOutDate() {
-		return outDate;
+	public GregorianCalendar getOutDate() {
+		return this.outDate;
 	}
 
-	public void setOutDate(Date outDate) {
+	public void setOutDate(GregorianCalendar outDate) {
 		this.outDate = outDate;
 	}
 
@@ -48,11 +48,11 @@ public class PromotionA extends Promotion{
 		System.out.println(this.id);
 		System.out.println(fm.format(this.onDate.getTime()));
 		System.out.println(fm.format(this.outDate.getTime()));
+		System.out.printf("Giam gia: %d%s", pro_percent,(char)37);
 	}
 	public static void main(String[] args) throws ParseException {
-		Date onDate = (Date) fm.parse("30/04/2019");
-		Date outDate = (Date) fm.parse("30/04/2020");
-		Promotion a = new PromotionA(onDate,outDate,25);
+
+		Promotion a = new PromotionA("23/3/2018","23/3/2019",25);
 		a.show();
 	}
 }

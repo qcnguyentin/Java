@@ -1,40 +1,43 @@
 package deTai6;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.util.GregorianCalendar;
 
 public class PromotionC extends Promotion{
 	private static int count;
 	private String id;
-	private Date onDate;
-	private Date outDate;
+	private GregorianCalendar onDate;
+	private GregorianCalendar outDate;
 	
 	{
 		id = (String.format("C%04d", ++count));
 	}
 	
-	public PromotionC(Date onDate, Date outDate) {
+	public PromotionC(String onDate, String outDate) throws ParseException {
 		super();
-		this.onDate = onDate;
-		this.outDate = outDate;
+		this.onDate = new GregorianCalendar();
+		this.onDate.setTime(fm.parse(onDate));
+		this.outDate = new GregorianCalendar();
+		this.outDate.setTime(fm.parse(outDate));
 		
 	}
 	public String getId() {
 		return id;
 	}
 
-	public Date getOnDate() {
+	public GregorianCalendar getOnDate() {
 		return onDate;
 	}
 
-	public void setOnDate(Date onDate) {
+	public void setOnDate(GregorianCalendar onDate) {
 		this.onDate = onDate;
 	}
 
-	public Date getOutDate() {
+	public GregorianCalendar getOutDate() {
 		return outDate;
 	}
 
-	public void setOutDate(Date outDate) {
+	public void setOutDate(GregorianCalendar outDate) {
 		this.outDate = outDate;
 	}
 
