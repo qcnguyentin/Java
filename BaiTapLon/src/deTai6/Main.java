@@ -7,7 +7,7 @@ public class Main {
 		pm.addProd(p1);
 		pm.addProd();
 		pm.hienThi();
-		System.out.println("hello");
+		System.out.println("HEL");
 		// menu ->
 	}
 }
