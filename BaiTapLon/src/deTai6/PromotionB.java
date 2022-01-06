@@ -23,6 +23,13 @@ public class PromotionB extends Promotion{
 		this.listTicket = new TicketGift();
 		
 	}
+	
+	@Override
+	public void setGift() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public String getId() {
 		return id;
 	}

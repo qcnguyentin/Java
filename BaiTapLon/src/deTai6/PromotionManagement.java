@@ -15,31 +15,7 @@ public class PromotionManagement {
 	
 	//them san pham khong tham so
 	public void addProd() {
-		try (Scanner sc = new Scanner(System.in)) {
-			int chose;
-			System.out.printf("Nhap ten san pham: ");
-			String name = sc.nextLine();
-			System.out.printf("Nhap gia san pham: ");
-			double price = sc.nextDouble();
-			sc.nextLine();
-			do {
-			System.out.printf("Chon loai san pham:\n1. LapTop\n2. DienThoai\n3. MayTinhBang\n");
-			chose = sc.nextInt();
-			}while(chose <= 0 && chose >= 4);
-			TypeProduct tp = null;
-			switch(chose) {
-			case 1:
-				tp = TypeProduct.LAPTOP;
-				break;
-			case 2:
-				tp = TypeProduct.DIEN_THOAI;
-				break;
-			case 3:
-				tp = TypeProduct.MAY_TINH_BANG;
-				break;
-			}
-			this.listProd.add(new Product(name, price, tp));
-		}
+		this.listProd.add(new Product());
 	}
 	
 	public List<Promotion> promXOnDate(int x) {

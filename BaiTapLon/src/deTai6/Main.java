@@ -6,6 +6,7 @@ public class Main {
 		PromotionManagement pm = new PromotionManagement();
 		pm.addProd(p1);
 		pm.addProd();
+		pm.addProd();
 		pm.hienThi();
 		System.out.println("HEL");
 		// menu ->

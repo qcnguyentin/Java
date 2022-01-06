@@ -12,6 +12,8 @@ abstract class Promotion {
 	
 	public abstract void show() ;
 	
+	public abstract void setGift();
+	
 	public abstract String getId() ;
 	
 	public abstract GregorianCalendar getOnDate();
