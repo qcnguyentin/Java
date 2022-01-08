@@ -4,3 +4,10 @@ prob show
 dang lam
 proC SpMuaKem : (tao thu cong, add thu cong)
 //Tai nghe - KMA - KMkem // dang lam
+
+
+//
+(product) => List FULL => List kmNeed (bij trung)
+
+//
+lam ham xoa pro x day ben promotionmanager

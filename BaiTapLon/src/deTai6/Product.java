@@ -1,8 +1,11 @@
 package deTai6;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Product {
 	private static int count;
@@ -90,10 +93,29 @@ public class Product {
 	}
 	
 	//xoa san pham
-	public void delPromotion(Promotion p) {
-		
+	public void delPromotion() {//xoapro het han
+//		list.stream().filter(p->p.)
+//		this.listPromotion.stream().filter(h -> h.isOutDate()).collect(Collectors.toList()));
+		this.listPromotion.forEach(h ->{
+			if(h.isOutDate()) this.listPromotion.remove(h);
+		});
+//		List<Promotion> list = this.listPromotion.stream().filter(h->h.isOutDate()).collect(Collectors.toList());
 	}
-	
+	public List<Promotion> xDayToOut(int x){
+		return this.listPromotion.stream().filter(h->{
+			GregorianCalendar tmp = new GregorianCalendar();
+			tmp.add(Calendar.DAY_OF_MONTH, x);
+//			if(tmp.c) return true;//13
+//			System.out.println(Promotion.fm.format(tmp.getTime()));
+//			System.out.println(tmp.getTime());
+//			if(Promotion.fm.format(tmp.getTime()).equalsIgnoreCase(Promotion.fm.format(h.getOutDate().getTime())))
+//			if(Promotion.fm.format(tmp.getTime()).compareTo(Promotion.fm.format(h.getOutDate().getTime()))==0)
+			if(Promotion.fm.format(tmp.getTime()).compareTo(Promotion.fm.format(h.getOutDate().getTime()))==0)
+			return true;
+			return false;
+		}).collect(Collectors.toList());
+//
+	}
 	//xuat san pham
 	public void show() {
 		// TODO Auto-generated method stub

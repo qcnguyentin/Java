@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PromotionManagement {
-	private List<Promotion> listProm = new ArrayList<>();
+//	private List<Promotion> listProm = new ArrayList<>();
 	private List<Product> listProd = new ArrayList<>();
 	
 	//them san pham
+	// 
 	public void addProd(Product p) {
 		this.listProd.add(p);
 	}
@@ -39,15 +40,14 @@ public class PromotionManagement {
 //	}
 	
 	public List<Promotion> promXOnDate(int x) {
-		//kiem tra cac khuyen mai con x ngay
 		
+		//
 		return null;
 	}
 	
-	public List<Promotion> promCheck() {
+	public void delOutDateProm() {
 		//kiem tra cac khuyen mai het hieu luc
-		
-		return null;
+		this.listProd.forEach(p->p.delPromotion());
 	}
 	
 	public void show() {
@@ -72,12 +72,12 @@ public class PromotionManagement {
 	}
 	
 	
-	public List<Promotion> getListProm() {
-		return listProm;
-	}
-	public void setListProm(List<Promotion> listProm) {
-		this.listProm = listProm;
-	}
+//	public List<Promotion> getListProm() {
+//		return listProm;
+//	}
+//	public void setListProm(List<Promotion> listProm) {
+//		this.listProm = listProm;
+//	}
 	public List<Product> getListProd() {
 		return listProd;
 	}

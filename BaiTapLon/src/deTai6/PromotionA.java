@@ -1,6 +1,8 @@
 package deTai6;
 
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class PromotionA extends Promotion{
@@ -11,6 +13,7 @@ public class PromotionA extends Promotion{
 	private int pro_percent;
 	{
 		id = (String.format("A%02d", ++count));
+//		PromotionManagement.ad
 	}
 	
 	public PromotionA(String onDate, String outDate, int pro_percent) throws ParseException {
@@ -30,7 +33,7 @@ public class PromotionA extends Promotion{
 	public String getId() {
 		return id;
 	}
-
+	
 	public GregorianCalendar getOnDate() {
 		return this.onDate;
 	}
@@ -46,7 +49,9 @@ public class PromotionA extends Promotion{
 	public void setOutDate(GregorianCalendar outDate) {
 		this.outDate = outDate;
 	}
-
+	public boolean isOutDate() {
+		return this.outDate.before(new GregorianCalendar());
+	}
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -57,7 +62,17 @@ public class PromotionA extends Promotion{
 	}
 	public static void main(String[] args) throws ParseException {
 
-		Promotion a = new PromotionA("23/3/2018","23/3/2019",25);
-		a.show();
+//		Promotion a = new PromotionA("23/3/2018","23/3/2019",25);
+//		System.out.println(a.isOutDate());
+		Promotion b = new PromotionA("23/3/2018","9/1/2022",25);
+//		System.out.println(b.isOutDate());
+//		b.getOutDate().
+		GregorianCalendar ou = b.getOutDate();
+//		String ouSt = fm.format(ou);
+//		System.out.println((ou.getTimeInMillis()-(new GregorianCalendar()).getTimeInMillis())/(24*3600*1000));
+//		a.show();
+		ou.add(GregorianCalendar.DAY_OF_MONTH, 4);
 	}
+
+	
 }

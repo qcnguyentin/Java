@@ -81,6 +81,13 @@ public class PromotionC extends Promotion{
 			System.out.printf("Giam gia: %d%s\n", perCent, (char) 37);
 		});
 	}
+	
+	@Override
+	public boolean isOutDate() {
+		// TODO Auto-generated method stub
+		return this.outDate.before(new GregorianCalendar());
+	}
+
 	public static void main(String[] args) throws ParseException {
 		Promotion pr = new PromotionC("11/11/2020", "11/11/2022");
 		pr.show();

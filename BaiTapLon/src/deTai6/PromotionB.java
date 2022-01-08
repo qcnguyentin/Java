@@ -62,4 +62,11 @@ public class PromotionB extends Promotion{
 		Promotion prB = new PromotionB("20/8/2020", "20/8/2021");
 		prB.show();
 	}
+
+	@Override
+	public boolean isOutDate() {
+		// TODO Auto-generated method stub
+		return this.outDate.before(new GregorianCalendar());
+	}
+
 }
