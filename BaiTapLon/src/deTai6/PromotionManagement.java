@@ -3,6 +3,7 @@ package deTai6;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class PromotionManagement {
 	private List<Promotion> listProm = new ArrayList<>();
@@ -17,6 +18,18 @@ public class PromotionManagement {
 	public void addProd() {
 		this.listProd.add(new Product());
 	}
+	
+	public List<Product> search(String name) {
+		return this.listProd.stream().filter(p -> p.getName().contains(name) == true).collect(Collectors.toList());
+	}
+	
+	public List<Product> search(double priceHead, double priceTail) {
+		return this.listProd.stream().filter(p -> p.getPrice() >= priceHead && p.getPrice() <= priceTail).collect(Collectors.toList());
+	}
+	
+//	public List<Product> search(String name) {
+//		return this.listProd.stream().filter(p -> p.getPrice() >= priceHead && p.getPrice() <= priceTail).collect(Collectors.toList());
+//	}
 	
 	public List<Promotion> promXOnDate(int x) {
 		//kiem tra cac khuyen mai con x ngay
