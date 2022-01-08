@@ -54,7 +54,7 @@ public class PromotionA extends Promotion{
 		System.out.println(this.id);
 		System.out.println(fm.format(this.onDate.getTime()));
 		System.out.println(fm.format(this.outDate.getTime()));
-		System.out.printf("Giam gia: %d%s", pro_percent,(char)37);
+		System.out.printf("Giam gia: %d%s\n", pro_percent,(char)37);
 	}
 	public static void main(String[] args) throws ParseException {
 

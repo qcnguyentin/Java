@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Product {
 	private static int count;
@@ -13,6 +14,7 @@ public class Product {
 	private TypeProduct typeProduct;
 	private List<Promotion> listPromotion = new ArrayList<>();
 	
+	//khoi tao san pham
 	public Product(String n, double p, TypeProduct t) {
 		this.name = n;
 		this.price = p;
@@ -70,24 +72,38 @@ public class Product {
 		this.price = price;
 		this.typeProduct = tp;
 	}
+//	public List<Promotion> search(String kindOfProm) {
+//		return this.listPromotion.stream().filter(s -> {
+//			try {
+//				Class myClass = Class.forName(kindOfProm);
+//
+//				return myClass.isInstance(s);
+//			} catch (ClassNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			return false;
+//		}).collect(Collectors.toList());
+//	}
 	
+	//them san pham
 	public void addPromotion(Promotion p) {
 		this.listPromotion.add(p);
 	}
 	
-	public void addpromotion() {
-		
-	}
-	
+	//xoa san pham
 	public void delPromotion(Promotion p) {
 		
 	}
 	
-	@Override
-	public String toString() {
+	//xuat san pham
+	public void show() {
 		// TODO Auto-generated method stub
-		return String.format("Ma san pham: %d\nTen san pham: %s\nGia san pham: %.1f\nDanh muc san pham: %s\n", 
+		System.out.printf("Ma san pham: %d\nTen san pham: %s\nGia san pham: %.1f\nDanh muc san pham: %s\n", 
 				this.id, this.name, this.price, this.typeProduct);
+		System.out.println("==DANH MUC CAC KHUYEN MAI==");
+		this.listPromotion.forEach(l -> l.show());
+		System.out.println();
 	}
 	
 	//getter && setter

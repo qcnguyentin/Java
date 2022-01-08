@@ -23,6 +23,14 @@ public class PromotionManagement {
 		return this.listProd.stream().filter(p -> p.getName().contains(name) == true).collect(Collectors.toList());
 	}
 	
+	public List<Product> searchProm(String kindOfProm) throws ClassNotFoundException{
+		Class myClass = Class.forName(kindOfProm);
+		return this.listProd.stream().filter(p -> p.getListPromotion().stream().anyMatch(pr -> 
+		myClass.isInstance(pr))).collect(Collectors.toList());
+		
+	}
+	
+	
 	public List<Product> search(double priceHead, double priceTail) {
 		return this.listProd.stream().filter(p -> p.getPrice() >= priceHead && p.getPrice() <= priceTail).collect(Collectors.toList());
 	}
@@ -43,9 +51,9 @@ public class PromotionManagement {
 		return null;
 	}
 	
-	public void hienThi() {
+	public void show() {
 		for(Product x: listProd)
-			System.out.println(x);
+			x.show();
 	}
 	
 	public void checkPromListOf(int id) {

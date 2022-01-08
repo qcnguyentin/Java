@@ -14,15 +14,15 @@ abstract class Promotion {
 	
 	public abstract void setGift();
 	
-//	public abstract String getId() ;
-//	
-//	public abstract GregorianCalendar getOnDate();
-//	
-//	public abstract void setOnDate(GregorianCalendar onDate);
-//	
-//	public abstract GregorianCalendar getOutDate();
-//	
-//	public abstract void setOutDate(GregorianCalendar outDate);
+	public abstract String getId() ;
+	
+	public abstract GregorianCalendar getOnDate();
+	
+	public abstract void setOnDate(GregorianCalendar onDate);
+	
+	public abstract GregorianCalendar getOutDate();
+	
+	public abstract void setOutDate(GregorianCalendar outDate);
 	
 	//gift -> ? void
 }
