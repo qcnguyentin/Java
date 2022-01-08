@@ -1,7 +1,6 @@
 package deTai6;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class PromotionA extends Promotion{

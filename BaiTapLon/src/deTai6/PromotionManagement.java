@@ -2,7 +2,6 @@ package deTai6;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class PromotionManagement {
@@ -24,7 +23,7 @@ public class PromotionManagement {
 	}
 	
 	public List<Product> searchProm(String kindOfProm) throws ClassNotFoundException{
-		Class myClass = Class.forName(kindOfProm);
+		Class<?> myClass = Class.forName(kindOfProm);
 		return this.listProd.stream().filter(p -> p.getListPromotion().stream().anyMatch(pr -> 
 		myClass.isInstance(pr))).collect(Collectors.toList());
 		
