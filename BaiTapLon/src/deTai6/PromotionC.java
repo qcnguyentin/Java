@@ -25,6 +25,18 @@ public class PromotionC extends Promotion{
 		this.outDate.setTime(fm.parse(outDate));
 		this.setGift();
 	}
+	public PromotionC() throws ParseException {
+		// TODO Auto-generated constructor stub
+		System.out.println("Nhap ngay tao: ");
+		String onDate = Promotion.sc.nextLine();
+		System.out.println("Nhap ngay het hieu luc: ");
+		String outDate = Promotion.sc.nextLine();
+		this.onDate = new GregorianCalendar();
+		this.onDate.setTime(fm.parse(onDate));
+		this.outDate = new GregorianCalendar();
+		this.outDate.setTime(fm.parse(outDate));
+		this.setGift();
+	}
 	
 	public void addProd() {
 		this.listProd.add(new Product());
@@ -39,10 +51,10 @@ public class PromotionC extends Promotion{
 	
 	@Override
 	public void setGift() {
-		// TODO Auto-generated method stub
-		//nhap so san pham khi mua kem duoc giam gia -> for
-		this.addProd();
-		this.addProd();
+		int n;
+		System.out.print("Nhap so luong san pham duoc khuyen mai khi kem: ");
+		n = Integer.parseInt(Promotion.sc.nextLine());
+		for(int i = 1; i <= n; i++)
 		this.addProd();
 	}
 	
@@ -77,7 +89,7 @@ public class PromotionC extends Promotion{
 		this.listProd.forEach(p -> { 
 			Random rd = new Random();
 			int perCent = Math.abs(rd.nextInt(30)) + 10;
-			System.out.print(p.toString());
+			p.show();
 			System.out.printf("Giam gia: %d%s\n", perCent, (char) 37);
 		});
 	}

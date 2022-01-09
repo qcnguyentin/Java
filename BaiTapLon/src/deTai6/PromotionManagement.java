@@ -1,5 +1,6 @@
 package deTai6;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -91,7 +92,7 @@ public class PromotionManagement {
 		this.listProd = listProd;
 	}
 
-	public void menu() throws ClassNotFoundException, NumberFormatException {
+	public void menu() throws ClassNotFoundException, NumberFormatException, ParseException {
 		boolean exit = false;
 		while (!exit) {
 			System.out.println("QUAN LY");
@@ -172,13 +173,39 @@ public class PromotionManagement {
 				System.out.println("Id \t Name");
 				this.listProd.forEach(p->System.out.println(p.getId()+"\t"+p.getName()));
 				System.out.println("Chon san pham theo Id: ");
+				chose = Integer.parseInt(Promotion.sc.nextLine());
+				boolean isId = true;
 				while(true) {
-					chose = Integer.parseInt(Promotion.sc.nextLine()); // int x; x = sc.nextint ;if (x ==3)
-//					final int tmp = Integer.parseInt(Promotion.sc.nextLine());
-					//search Id // Chua cos search ID // 
-					
-					if(this.listProd.stream().anyMatch(p->p.getId()==chose)) {
-						
+					Promotion p;
+					while(true) {
+						System.out.println("Chon loai khuyen mai\n" + "1. Khuyen mai A\n" + "2. Khuyen mai B\n"
+								+ "3. Khuyen mai C\n" + "Chon: ");
+						int chose2 = Integer.parseInt(Promotion.sc.nextLine());
+						switch (chose2) {
+						case 1:
+							p = new PromotionA();
+							break;
+						case 2:
+							p = new PromotionB();
+							break;
+						case 3:
+							p = new PromotionC();
+							break;
+						default:
+							throw new IllegalArgumentException("Unexpected value: " + chose);
+						}
+						if (chose > 0 || chose < 4)
+							break;
+					}
+					for(Product x:listProd) {
+						if(x.getId() == chose) {
+							x.addPromotion(p);
+							System.out.println("Them thanh cong");
+							x.show();
+							isId = false;
+						}
+					}
+					if(!isId) {
 						break;
 					}
 				}
@@ -215,9 +242,13 @@ public class PromotionManagement {
 			default:
 				break;
 			}
-			System.out.flush();
+			clearScreen();
 		}
 
+	}
+	public static void clearScreen() {  
+	    System.out.print("\033[H\033[2J");  
+	    System.out.flush();  
 	}
 
 }
