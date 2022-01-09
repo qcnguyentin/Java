@@ -105,11 +105,7 @@ public class Product {
 		return this.listPromotion.stream().filter(h->{
 			GregorianCalendar tmp = new GregorianCalendar();
 			tmp.add(Calendar.DAY_OF_MONTH, x);
-//			if(tmp.c) return true;//13
-//			System.out.println(Promotion.fm.format(tmp.getTime()));
-//			System.out.println(tmp.getTime());
 //			if(Promotion.fm.format(tmp.getTime()).equalsIgnoreCase(Promotion.fm.format(h.getOutDate().getTime())))
-//			if(Promotion.fm.format(tmp.getTime()).compareTo(Promotion.fm.format(h.getOutDate().getTime()))==0)
 			if(Promotion.fm.format(tmp.getTime()).compareTo(Promotion.fm.format(h.getOutDate().getTime()))==0)
 			return true;
 			return false;
