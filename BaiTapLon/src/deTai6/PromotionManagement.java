@@ -9,9 +9,8 @@ import java.util.stream.Collectors;
 public class PromotionManagement {
 //	private List<Promotion> listProm = new ArrayList<>();
 	private List<Product> listProd = new ArrayList<>();
-
+	
 	// them san pham
-	//
 	public void addProd(Product p) {
 		this.listProd.add(p);
 	}
@@ -24,7 +23,6 @@ public class PromotionManagement {
 	public List<Product> search(String name) {
 		String tmp = name.toLowerCase();
 		return this.listProd.stream().filter(p -> p.getName().toLowerCase().contains(tmp)).collect(Collectors.toList());
-
 	}
 
 	public List<Product> searchProm(String kindOfProm) throws ClassNotFoundException {
@@ -39,10 +37,6 @@ public class PromotionManagement {
 				.collect(Collectors.toList());
 	}
 
-//	public List<Product> search(String name) {
-//		return this.listProd.stream().filter(p -> p.getPrice() >= priceHead && p.getPrice() <= priceTail).collect(Collectors.toList());
-//	}
-
 	public List<Promotion> promXOnDate(int x) {
 		List<Promotion> listResult = new ArrayList<Promotion>();
 		LinkedHashSet<Promotion> check = new LinkedHashSet<Promotion>();
@@ -50,7 +44,6 @@ public class PromotionManagement {
 			if (check.add(h))
 				listResult.add(h);
 		}));
-		//
 		return listResult;
 	}
 
@@ -64,28 +57,10 @@ public class PromotionManagement {
 			x.show();
 	}
 
-	public void checkPromListOf(int id) {
-
+	public void sortProd() {
+		this.listProd.sort((h1, h2) -> h1.compare(h2));
 	}
 
-	public void checkPromListOf(String name) {
-
-	}
-
-	public void checkProdListOf(Promotion p) {
-
-	}
-
-	public List<Product> sortProd() {
-		return null;
-	}
-
-//	public List<Promotion> getListProm() {
-//		return listProm;
-//	}
-//	public void setListProm(List<Promotion> listProm) {
-//		this.listProm = listProm;
-//	}
 	public List<Product> getListProd() {
 		return listProd;
 	}
@@ -116,7 +91,7 @@ public class PromotionManagement {
 	public void menu() throws ClassNotFoundException, NumberFormatException, ParseException {
 		boolean exit = false;
 		while (!exit) {
-			System.out.println("QUAN LY");
+			System.out.println("====QUAN LY====");
 			System.out.print("1. Them san pham\n" + "2. Tim kiem\n" + "3. Them khuyen mai\n"
 					+ "4. Xoa khuyen mai het han\n" + "5. Nhap so ngay kiem tra khuyen mai sap het han\n"
 					+ "6. Hien thi thong tin khuyen mai\n" + "7. Tra cuu san pham theo khuyen mai\n"
@@ -125,7 +100,8 @@ public class PromotionManagement {
 			switch (chose) {
 			case 1: {
 				this.listProd.add(new Product());
-				System.out.println("Enter de ve menu\n");
+				System.out.println("+ Them thanh cong");
+				System.out.println();
 				break;
 			}
 			case 2: {
@@ -139,7 +115,6 @@ public class PromotionManagement {
 						System.out.println("Nhap ten sp muon tim: ");
 						String stringName = Promotion.sc.nextLine();
 						this.search(stringName).forEach(p -> p.show());
-						System.out.println("Enter de ve menu\n");
 						break;
 					}
 					case 2: {
@@ -148,8 +123,11 @@ public class PromotionManagement {
 						begin = Integer.parseInt(Promotion.sc.nextLine());
 						System.out.println("Den: ");
 						end = Integer.parseInt(Promotion.sc.nextLine());
-						this.search(begin, end).forEach(p -> p.show());
-						System.out.println("Enter de ve menu\n");
+						List<Product> rs = this.search(begin, end); 
+						if(rs.isEmpty())
+							System.out.println("+ Khong co san pham!");
+						else
+							rs.forEach(p -> p.show());
 						break;
 					}
 					case 3: {
@@ -160,17 +138,14 @@ public class PromotionManagement {
 							switch (chose) {
 							case 1: {
 								this.searchProm("deTai6.PromotionA").forEach(h -> h.show());
-								System.out.println("Enter de ve menu\n");
 								break;
 							}
 							case 2: {
 								this.searchProm("deTai6.PromotionB").forEach(h -> h.show());
-								System.out.println("Enter de ve menu\n");
 								break;
 							}
 							case 3: {
 								this.searchProm("deTai6.PromotionC").forEach(h -> h.show());
-								System.out.println("Enter de ve menu\n");
 								break;
 							}
 
@@ -187,7 +162,7 @@ public class PromotionManagement {
 					if (chose > 0 || chose < 4)
 						break;
 				}
-
+				System.out.println();
 				break;
 			}
 			case 3: {
@@ -223,6 +198,7 @@ public class PromotionManagement {
 							x.addPromotion(p);
 							System.out.println("Them thanh cong");
 							x.show();
+							x.viewProm();
 							isId = false;
 						}
 					}
@@ -230,21 +206,21 @@ public class PromotionManagement {
 						break;
 					}
 				}
+				System.out.println();
 				break;
 			}
 			case 4: {
 				this.delOutDateProm();
-				System.out.println("Enter de ve menu\n");
 				Promotion.sc.nextLine();
+				System.out.println();
 				break;
 			}
 			case 5: {
 				System.out.println("Nhap so ngay: ");
 				int x = Integer.parseInt(Promotion.sc.nextLine());
 				this.promXOnDate(x).forEach(p -> p.show());
-				;
-				System.out.println("Enter de ve menu\n");
 				Promotion.sc.nextLine();
+				System.out.println();
 				break;
 			}
 			case 6: {
@@ -260,6 +236,7 @@ public class PromotionManagement {
 						System.out.println("Khong tim thay san pham yeu cau\n");
 					// TODO: handle exception
 				}
+				System.out.println();
 				break;
 			}
 			case 7: {
@@ -273,7 +250,6 @@ public class PromotionManagement {
 							h.show();
 							h.viewProm();
 						});
-						System.out.println("Enter de ve menu\n");
 						break;
 					}
 					case 2: {
@@ -281,7 +257,6 @@ public class PromotionManagement {
 							h.show();
 							h.viewProm();
 						});
-						System.out.println("Enter de ve menu\n");
 						break;
 					}
 					case 3: {
@@ -289,7 +264,6 @@ public class PromotionManagement {
 							h.show();
 							h.viewProm();
 						});
-						System.out.println("Enter de ve menu\n");
 						break;
 					}
 
@@ -297,9 +271,13 @@ public class PromotionManagement {
 					if (chose > 0 || chose < 4)
 						break;
 				}
+				System.out.println();
 				break;
 			}
 			case 8: {
+				this.sortProd();
+				System.out.println("Sap xep thanh cong!");
+				System.out.println();
 				break;
 			}
 			case 9: {

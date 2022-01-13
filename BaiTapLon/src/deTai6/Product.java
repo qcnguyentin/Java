@@ -40,8 +40,8 @@ public class Product {
 		
 		do {
 			try {
-				System.out.printf("Chon loai san pham:\n1. LapTop\n2. DienThoai\n3. MayTinhBang\n"
-						+ "4. CHUOT\n5. TAI NGHE\n");
+				System.out.printf("Chon loai san pham:\n1. LapTop\n2. Dien thoai\n3. May tinh bang\n"
+						+ "4. Chuot\n5. Tai nghe\n");
 				chose = Promotion.sc.nextInt();
 				if(chose < 6 && chose >0) {
 					break;
@@ -64,48 +64,51 @@ public class Product {
 			tp = TypeProduct.MAY_TINH_BANG;
 			break;
 		case 4:
-			tp = TypeProduct.MOUSE;
+			tp = TypeProduct.CHUOT;
+			break;
 		case 5:
-			tp = TypeProduct.HEAD_PHONE;
+			tp = TypeProduct.TAI_NGHE;
+			break;
 		}
 		
 		this.name = name;
 		this.price = price;
 		this.typeProduct = tp;
 	}
-//	public List<Promotion> search(String kindOfProm) {
-//		return this.listPromotion.stream().filter(s -> {
-//			try {
-//				Class myClass = Class.forName(kindOfProm);
-//
-//				return myClass.isInstance(s);
-//			} catch (ClassNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			return false;
-//		}).collect(Collectors.toList());
-//	}
+	
+	public int compare(Product p) {
+		int a = this.countPromIsOnDate();
+		int b = p.countPromIsOnDate();
+		return (a < b) ? 1:(a > b) ? -1:0;
+	}
+	
+	public int countPromIsOnDate() {
+		int promIsOnDate = 0;
+		for(Promotion x:listPromotion) {
+			if(!x.isOutDate())
+				promIsOnDate++;
+		}
+		return promIsOnDate;
+	}
 	
 	//them san pham
-	public void addPromotion(Promotion p) {
+	public void addPromotion(Promotion p) throws ClassNotFoundException {
+		Class<?> promA = Class.forName("deTai6.PromotionA");
+		if(promA.isInstance(p))
+			this.price -= this.price*p.gift()/100;
 		this.listPromotion.add(p);
 	}
 	
 	//xoa san pham
 	public void delPromotion() {//xoapro het han
-//		list.stream().filter(p->p.)
-//		this.listPromotion.stream().filter(h -> h.isOutDate()).collect(Collectors.toList()));
 		this.listPromotion.forEach(h ->{
 			if(h.isOutDate()) this.listPromotion.remove(h);
 		});
-//		List<Promotion> list = this.listPromotion.stream().filter(h->h.isOutDate()).collect(Collectors.toList());
 	}
 	public List<Promotion> xDayToOut(int x){
 		return this.listPromotion.stream().filter(h->{
 			GregorianCalendar tmp = new GregorianCalendar();
 			tmp.add(Calendar.DAY_OF_MONTH, x);
-//			if(Promotion.fm.format(tmp.getTime()).equalsIgnoreCase(Promotion.fm.format(h.getOutDate().getTime())))
 			if(Promotion.fm.format(tmp.getTime()).compareTo(Promotion.fm.format(h.getOutDate().getTime()))==0)
 			return true;
 			return false;

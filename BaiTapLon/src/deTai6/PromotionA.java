@@ -1,8 +1,6 @@
 package deTai6;
 
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class PromotionA extends Promotion{
@@ -40,13 +38,8 @@ public class PromotionA extends Promotion{
 		this.pro_percent = pro_percent;
 	}
 	
-	@Override
-	public void setGift() {
-		// TODO Auto-generated method stub
-		
-	}
 	public String getId() {
-		return id;
+		return this.id;
 	}
 	
 	public GregorianCalendar getOnDate() {
@@ -87,6 +80,12 @@ public class PromotionA extends Promotion{
 //		System.out.println((ou.getTimeInMillis()-(new GregorianCalendar()).getTimeInMillis())/(24*3600*1000));
 //		a.show();
 		ou.add(GregorianCalendar.DAY_OF_MONTH, 4);
+	}
+
+	@Override
+	public int gift() {
+		// TODO Auto-generated method stub
+		return this.pro_percent;
 	}
 
 	

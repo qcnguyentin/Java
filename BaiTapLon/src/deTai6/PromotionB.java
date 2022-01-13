@@ -56,12 +56,6 @@ public class PromotionB extends Promotion{
 		this.listTicket.add(ticket1);	
 	}
 	
-	@Override
-	public void setGift() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	public String getId() {
 		return id;
 	}
@@ -103,6 +97,12 @@ public class PromotionB extends Promotion{
 	public boolean isOutDate() {
 		// TODO Auto-generated method stub
 		return this.outDate.before(new GregorianCalendar());
+	}
+
+	@Override
+	public int gift() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

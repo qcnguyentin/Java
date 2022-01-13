@@ -12,7 +12,7 @@ abstract class Promotion {
 
 	public abstract void show();
 
-	public abstract void setGift();
+	public abstract int gift();
 
 	public abstract String getId();
 
