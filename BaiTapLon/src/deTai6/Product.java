@@ -32,7 +32,7 @@ public class Product {
 				price = Promotion.sc.nextDouble();
 				break;
 			} catch(InputMismatchException ex) {
-				System.err.println("DITMEMAYNGUVAILOLTAOBAONHAPTIENNOLASODEOPHAICHU");
+				System.err.println("==Nhap sai gia tri!==");
 				Promotion.sc.nextLine();
 			}
 		} while(true);
@@ -47,7 +47,7 @@ public class Product {
 					break;
 				}
 			} catch(InputMismatchException ex) {
-				System.err.println("DITMEMAYNGUVAILOLTAOBAONHAPTIENNOLASODEOPHAICHU");
+				System.err.println("==Nhap sai gia tri!==");
 				Promotion.sc.nextLine();
 			}
 		} while(true);
@@ -117,7 +117,7 @@ public class Product {
 	//xuat san pham
 	public void show() {
 		// TODO Auto-generated method stub
-		System.out.printf("Ma san pham: %d\n", this.id);
+		System.out.printf("+ Ma san pham: %d\n", this.id);
 		System.out.printf("Ten san pham: %s\n", this.name);
 		System.out.printf("Gia san pham: %.1f\n", this.price);
 		System.out.printf("Danh muc san pham: %s\n", this.typeProduct);

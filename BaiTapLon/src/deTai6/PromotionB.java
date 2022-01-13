@@ -81,8 +81,10 @@ public class PromotionB extends Promotion{
 		// TODO Auto-generated method stub
 		System.out.printf("Ma khuyen mai: %s\n", this.id);
 		System.out.printf("Ngay tao: %s\n",fm.format(this.onDate.getTime()));
-		System.out.printf("Ngay het han",fm.format(this.outDate.getTime()));
+		System.out.printf("Ngay het han: %s\n",fm.format(this.outDate.getTime()));
 		this.listTicket.forEach(h -> System.out.println(h));
+		if(this.isOutDate())
+			System.out.println("***HET HAN***");
 	}
 
 	@Override

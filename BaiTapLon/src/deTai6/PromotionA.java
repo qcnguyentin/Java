@@ -45,8 +45,10 @@ public class PromotionA extends Promotion{
 		// TODO Auto-generated method stub
 		System.out.printf("Ma khuyen mai: %s\n", this.id);
 		System.out.printf("Ngay tao: %s\n",fm.format(this.onDate.getTime()));
-		System.out.printf("Ngay het han",fm.format(this.outDate.getTime()));
+		System.out.printf("Ngay het han: %s\n",fm.format(this.outDate.getTime()));
 		System.out.printf("Giam gia: %d%s\n", pro_percent,(char)37);
+		if(this.isOutDate())
+			System.out.println("***HET HAN***");
 	}
 
 	@Override

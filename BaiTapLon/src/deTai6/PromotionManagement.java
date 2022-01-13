@@ -89,6 +89,7 @@ public class PromotionManagement {
 		}
 		return false;
 	}
+	
 
 	public void menu() throws ClassNotFoundException, NumberFormatException, ParseException {
 		boolean exit = false;
@@ -97,7 +98,8 @@ public class PromotionManagement {
 			System.out.print("1. Them san pham\n" + "2. Tim kiem\n" + "3. Them khuyen mai\n"
 					+ "4. Xoa khuyen mai het han\n" + "5. Nhap so ngay kiem tra khuyen mai sap het han\n"
 					+ "6. Hien thi thong tin khuyen mai\n" + "7. Tra cuu san pham theo khuyen mai\n"
-					+ "8. Sap xep san pham\n" + "9. Thoat\n" + "Chon: ");
+					+ "8. Sap xep san pham\n" + "9. Hien thi thong tin tat ca san pham\n"
+							+ "0. Thoat\n" + "Chon: ");
 			int chose = Integer.parseInt(Promotion.sc.nextLine());
 			switch (chose) {
 			case 1: {
@@ -297,6 +299,10 @@ public class PromotionManagement {
 				break;
 			}
 			case 9: {
+				this.show();
+				break;
+			}
+			case 0: {
 				exit = true;
 				break;
 			}
