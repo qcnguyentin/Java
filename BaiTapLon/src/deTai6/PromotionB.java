@@ -79,18 +79,10 @@ public class PromotionB extends Promotion{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		System.out.println(this.id);
-		System.out.println(fm.format(this.onDate.getTime()));
-		System.out.println(fm.format(this.outDate.getTime()));
+		System.out.printf("Ma khuyen mai: %s\n", this.id);
+		System.out.printf("Ngay tao: %s\n",fm.format(this.onDate.getTime()));
+		System.out.printf("Ngay het han",fm.format(this.outDate.getTime()));
 		this.listTicket.forEach(h -> System.out.println(h));
-	}
-	public static void main(String[] args) throws ParseException {
-		Promotion prB = new PromotionB("20/8/2020", "20/8/2021", "Ve xem phim", "Ve xem ca nhac");
-		Promotion prB1 = new PromotionB("20/8/2020", "20/8/2021", "Ve xem phim");
-		Promotion prB2 = new PromotionB();
-		prB.show();
-		prB1.show();
-		prB2.show();
 	}
 
 	@Override

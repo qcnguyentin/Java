@@ -53,8 +53,10 @@ public class PromotionManagement {
 	}
 
 	public void show() {
-		for (Product x : listProd)
+		for (Product x : listProd) {
 			x.show();
+			x.viewProm();
+		}
 	}
 
 	public void sortProd() {
@@ -135,17 +137,30 @@ public class PromotionManagement {
 								+ "3. Khuyen mai C\n" + "Chon: ");
 						while (true) {
 							chose = Integer.parseInt(Promotion.sc.nextLine());
+							List<Product> rs;
 							switch (chose) {
 							case 1: {
-								this.searchProm("deTai6.PromotionA").forEach(h -> h.show());
+								rs = this.searchProm("deTai6.PromotionA");
+								if(!rs.isEmpty())
+									rs.forEach(h -> h.show());
+								else
+									System.out.println("+ Khong co san pham");
 								break;
 							}
 							case 2: {
-								this.searchProm("deTai6.PromotionB").forEach(h -> h.show());
+								rs = this.searchProm("deTai6.PromotionB");
+								if(!rs.isEmpty())
+									rs.forEach(h -> h.show());
+								else
+									System.out.println("+ Khong co san pham");
 								break;
 							}
 							case 3: {
-								this.searchProm("deTai6.PromotionC").forEach(h -> h.show());
+								rs = this.searchProm("deTai6.PromotionC");
+								if(!rs.isEmpty())
+									rs.forEach(h -> h.show());
+								else
+									System.out.println("+ Khong co san pham");
 								break;
 							}
 
@@ -211,7 +226,8 @@ public class PromotionManagement {
 			}
 			case 4: {
 				this.delOutDateProm();
-				Promotion.sc.nextLine();
+				System.out.println("SUCCESS");
+				this.listProd.forEach(h -> h.viewProm());
 				System.out.println();
 				break;
 			}
@@ -219,7 +235,6 @@ public class PromotionManagement {
 				System.out.println("Nhap so ngay: ");
 				int x = Integer.parseInt(Promotion.sc.nextLine());
 				this.promXOnDate(x).forEach(p -> p.show());
-				Promotion.sc.nextLine();
 				System.out.println();
 				break;
 			}
@@ -277,6 +292,7 @@ public class PromotionManagement {
 			case 8: {
 				this.sortProd();
 				System.out.println("Sap xep thanh cong!");
+				this.show();
 				System.out.println();
 				break;
 			}
@@ -289,5 +305,4 @@ public class PromotionManagement {
 			}
 		}
 	}
-
 }
