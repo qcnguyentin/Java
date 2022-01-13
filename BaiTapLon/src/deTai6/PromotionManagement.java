@@ -24,7 +24,7 @@ public class PromotionManagement {
 	public List<Product> search(String name) {
 		String tmp = name.toLowerCase();
 		return this.listProd.stream().filter(p -> p.getName().toLowerCase().contains(tmp)).collect(Collectors.toList());
-		
+
 	}
 
 	public List<Product> searchProm(String kindOfProm) throws ClassNotFoundException {
@@ -93,17 +93,24 @@ public class PromotionManagement {
 	public void setListProd(List<Product> listProd) {
 		this.listProd = listProd;
 	}
-	public void viewProm(int id) {//ma
-		this.listProd.forEach(p->{
-			if(p.getId()==id)
-				p.viewProm();
-		});
+
+	public boolean viewProm(int id) {// ma
+		List<Product> ans = this.listProd.stream().filter(p -> p.getId() == id).collect(Collectors.toList());
+		if (!ans.isEmpty()) {
+			ans.forEach(p -> p.viewProm());
+			return true;
+		}
+		return false;
 	}
-	public void viewProm(String name) {//ten
-		this.listProd.forEach(p->{
-			if(p.getName().toLowerCase().contains(name.toLowerCase()))
-				p.viewProm();
-		});
+
+	public boolean viewProm(String name) {// ten
+		List<Product> ans = this.listProd.stream().filter(p -> p.getName().toLowerCase().contains(name.toLowerCase()))
+				.collect(Collectors.toList());
+		if (!ans.isEmpty()) {
+			ans.forEach(p -> p.viewProm());
+			return true;
+		}
+		return false;
 	}
 
 	public void menu() throws ClassNotFoundException, NumberFormatException, ParseException {
@@ -185,13 +192,13 @@ public class PromotionManagement {
 			}
 			case 3: {
 				System.out.println("Id \t Name");
-				this.listProd.forEach(p->System.out.println(p.getId()+"\t"+p.getName()));
+				this.listProd.forEach(p -> System.out.println(p.getId() + "\t" + p.getName()));
 				System.out.println("Chon san pham theo Id: ");
 				chose = Integer.parseInt(Promotion.sc.nextLine());
 				boolean isId = true;
-				while(true) {
+				while (true) {
 					Promotion p;
-					while(true) {
+					while (true) {
 						System.out.println("Chon loai khuyen mai\n" + "1. Khuyen mai A\n" + "2. Khuyen mai B\n"
 								+ "3. Khuyen mai C\n" + "Chon: ");
 						int chose2 = Integer.parseInt(Promotion.sc.nextLine());
@@ -211,15 +218,15 @@ public class PromotionManagement {
 						if (chose > 0 || chose < 4)
 							break;
 					}
-					for(Product x:listProd) {
-						if(x.getId() == chose) {
+					for (Product x : listProd) {
+						if (x.getId() == chose) {
 							x.addPromotion(p);
 							System.out.println("Them thanh cong");
 							x.show();
 							isId = false;
 						}
 					}
-					if(!isId) {
+					if (!isId) {
 						break;
 					}
 				}
@@ -234,16 +241,62 @@ public class PromotionManagement {
 			case 5: {
 				System.out.println("Nhap so ngay: ");
 				int x = Integer.parseInt(Promotion.sc.nextLine());
-				this.promXOnDate(x).forEach(p->p.show());;
+				this.promXOnDate(x).forEach(p -> p.show());
+				;
 				System.out.println("Enter de ve menu\n");
 				Promotion.sc.nextLine();
 				break;
 			}
 			case 6: {
+				System.out.println("Nhap ten hoac ma san pham: ");
+				String strIn = Promotion.sc.nextLine();
+
+				try {
+					int id = Integer.parseInt(strIn);
+					if (!this.viewProm(id))
+						System.out.println("Khong tim thay san pham yeu cau\n");
+				} catch (NumberFormatException ex) {
+					if (!this.viewProm(strIn))
+						System.out.println("Khong tim thay san pham yeu cau\n");
+					// TODO: handle exception
+				}
 				break;
 			}
 			case 7: {
+				System.out.println("Chon loai khuyen mai\n" + "1. Khuyen mai A\n" + "2. Khuyen mai B\n"
+						+ "3. Khuyen mai C\n" + "Chon: ");
+				while (true) {
+					chose = Integer.parseInt(Promotion.sc.nextLine());
+					switch (chose) {
+					case 1: {
+						this.searchProm("deTai6.PromotionA").forEach(h -> {
+							h.show();
+							h.viewProm();
+						});
+						System.out.println("Enter de ve menu\n");
+						break;
+					}
+					case 2: {
+						this.searchProm("deTai6.PromotionB").forEach(h -> {
+							h.show();
+							h.viewProm();
+						});
+						System.out.println("Enter de ve menu\n");
+						break;
+					}
+					case 3: {
+						this.searchProm("deTai6.PromotionC").forEach(h -> {
+							h.show();
+							h.viewProm();
+						});
+						System.out.println("Enter de ve menu\n");
+						break;
+					}
 
+					}
+					if (chose > 0 || chose < 4)
+						break;
+				}
 				break;
 			}
 			case 8: {
@@ -256,13 +309,7 @@ public class PromotionManagement {
 			default:
 				break;
 			}
-			clearScreen();
 		}
-
-	}
-	public static void clearScreen() {  
-	    System.out.print("\033[H\033[2J");  
-	    System.out.flush();  
 	}
 
 }

@@ -20,10 +20,12 @@ public class Main {
 		PromotionManagement pm = new PromotionManagement();
 		pm.addProd(p1);
 		pm.addProd(p2);
-		pm.viewProm(2);
+//		pm.viewProm(2);
 //		
 //		
 //		// menu ->
 //		pm.menu();
+
+
 	}
 }
