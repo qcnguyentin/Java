@@ -92,11 +92,7 @@ public class Product {
 	}
 	
 	//them san pham
-	public void addPromotion(Promotion p) throws ClassNotFoundException {
-		Class<?> promA = Class.forName("deTai6.PromotionA");
-		if(promA.isInstance(p))
-			if(!p.isOutDate())
-				this.price -= this.price * p.gift() /100;
+	public void addPromotion(Promotion p) {
 		this.listPromotion.add(p);
 	}
 	
@@ -114,14 +110,28 @@ public class Product {
 		}).collect(Collectors.toList());
 //
 	}
-	//xuat san pham
-	public void show() {
+	
+	//xuat san pham	
+	public void show()   {
 		// TODO Auto-generated method stub
+		int percent_Minus = 0;
+		Class<?> promA;
+		try {
+			promA = Class.forName("deTai6.PromotionA");
+			List<Promotion> check = this.listPromotion.stream().filter(p -> promA.isInstance(p)&&!p.isOutDate()).collect(Collectors.toList());
+			if(!check.isEmpty()) {
+				for(Promotion x : check) 
+					percent_Minus+=x.gift();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+		}
 		System.out.printf("+ Ma san pham: %d\n", this.id);
 		System.out.printf("Ten san pham: %s\n", this.name);
-		System.out.printf("Gia san pham: %.1f\n", this.price);
+		System.out.printf("Gia san pham: %.1f\n", this.price-(this.price*percent_Minus/100));
 		System.out.printf("Danh muc san pham: %s\n", this.typeProduct);
 	}
+	
 	public void viewProm() {
 		System.out.println("==DANH MUC CAC KHUYEN MAI==");
 		this.listPromotion.forEach(l -> l.show());

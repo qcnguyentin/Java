@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PromotionManagement {
-//	private List<Promotion> listProm = new ArrayList<>();
 	private List<Product> listProd = new ArrayList<>();
 	
 	// them san pham
@@ -90,6 +89,9 @@ public class PromotionManagement {
 		return false;
 	}
 	
+	public void viewProm() {
+		this.listProd.forEach(h->h.viewProm());
+	}
 
 	public void menu() throws ClassNotFoundException, NumberFormatException, ParseException {
 		boolean exit = false;
@@ -229,7 +231,10 @@ public class PromotionManagement {
 			case 4: {
 				this.delOutDateProm();
 				System.out.println("SUCCESS");
-				this.listProd.forEach(h -> h.viewProm());
+				this.listProd.forEach(h -> {
+					System.out.printf("Ma san pham: %d\n", h.getId());
+					h.viewProm();
+				});
 				System.out.println();
 				break;
 			}
