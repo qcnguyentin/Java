@@ -22,7 +22,9 @@ public class PromotionManagement {
 	}
 
 	public List<Product> search(String name) {
-		return this.listProd.stream().filter(p -> p.getName().contains(name) == true).collect(Collectors.toList());
+		String tmp = name.toLowerCase();
+		return this.listProd.stream().filter(p -> p.getName().toLowerCase().contains(tmp)).collect(Collectors.toList());
+		
 	}
 
 	public List<Product> searchProm(String kindOfProm) throws ClassNotFoundException {
@@ -90,6 +92,18 @@ public class PromotionManagement {
 
 	public void setListProd(List<Product> listProd) {
 		this.listProd = listProd;
+	}
+	public void viewProm(int id) {//ma
+		this.listProd.forEach(p->{
+			if(p.getId()==id)
+				p.viewProm();
+		});
+	}
+	public void viewProm(String name) {//ten
+		this.listProd.forEach(p->{
+			if(p.getName().toLowerCase().contains(name.toLowerCase()))
+				p.viewProm();
+		});
 	}
 
 	public void menu() throws ClassNotFoundException, NumberFormatException, ParseException {

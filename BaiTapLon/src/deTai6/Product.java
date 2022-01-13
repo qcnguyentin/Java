@@ -117,11 +117,12 @@ public class Product {
 		// TODO Auto-generated method stub
 		System.out.printf("Ma san pham: %d\nTen san pham: %s\nGia san pham: %.1f\nDanh muc san pham: %s\n", 
 				this.id, this.name, this.price, this.typeProduct);
+	}
+	public void viewProm() {
 		System.out.println("==DANH MUC CAC KHUYEN MAI==");
 		this.listPromotion.forEach(l -> l.show());
 		System.out.println();
 	}
-	
 	//getter && setter
 	public int getId() {
 		return id;
