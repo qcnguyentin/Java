@@ -1,8 +1,11 @@
 package deTai6;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 abstract class Promotion {
 
@@ -25,6 +28,6 @@ abstract class Promotion {
 	public abstract void setOutDate(GregorianCalendar outDate);
 	
 	public abstract boolean isOutDate();
-//	public abstract boolean isXDayLess(int x);
-	// gift -> ? void
+
+	public abstract boolean xDayToOut(int x);
 }

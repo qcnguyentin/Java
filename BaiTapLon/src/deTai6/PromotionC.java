@@ -2,6 +2,7 @@ package deTai6;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -107,6 +108,15 @@ public class PromotionC extends Promotion{
 
 	public void setOutDate(GregorianCalendar outDate) {
 		this.outDate = outDate;
+	}
+
+	@Override
+	public boolean xDayToOut(int x) {
+		GregorianCalendar tmp = new GregorianCalendar();
+		tmp.add(Calendar.DAY_OF_MONTH, x);
+		if (fm.format(tmp.getTime()).compareTo(fm.format(this.getOutDate().getTime())) == 0)
+			return true;
+		return false;
 	}
 	
 }

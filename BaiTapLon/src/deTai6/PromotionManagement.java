@@ -2,13 +2,13 @@ package deTai6;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PromotionManagement {
 	private List<Product> listProd = new ArrayList<>();
-	
+	private List<Promotion> listProm = new ArrayList<>();
+
 	// them san pham
 	public void addProd(Product p) {
 		this.listProd.add(p);
@@ -17,6 +17,10 @@ public class PromotionManagement {
 	// them san pham khong tham so
 	public void addProd() {
 		this.listProd.add(new Product());
+	}
+
+	public void addPromotion(Promotion p) {
+		this.listProm.add(p);
 	}
 
 	public List<Product> search(String name) {
@@ -36,19 +40,15 @@ public class PromotionManagement {
 				.collect(Collectors.toList());
 	}
 
-	public List<Promotion> promXOnDate(int x) {
-		List<Promotion> listResult = new ArrayList<Promotion>();
-		LinkedHashSet<Promotion> check = new LinkedHashSet<Promotion>();
-		this.listProd.forEach(p -> p.xDayToOut(x).forEach(h -> {
-			if (check.add(h))
-				listResult.add(h);
-		}));
-		return listResult;
+	public List<Promotion> promXOnDate(int days) {
+		return this.listProm.stream().filter(p -> p.xDayToOut(days)).collect(Collectors.toList());
 	}
 
 	public void delOutDateProm() {
 		// kiem tra cac khuyen mai het hieu luc
 		this.listProd.forEach(p -> p.delPromotion());
+		this.listProm.stream().filter(h -> h.isOutDate()).collect(Collectors.toList())
+				.forEach(p -> this.listProm.remove(p));
 	}
 
 	public void show() {
@@ -88,9 +88,9 @@ public class PromotionManagement {
 		}
 		return false;
 	}
-	
+
 	public void viewProm() {
-		this.listProd.forEach(h->h.viewProm());
+		this.listProd.forEach(h -> h.viewProm());
 	}
 
 	public void menu() throws ClassNotFoundException, NumberFormatException, ParseException {
@@ -100,8 +100,7 @@ public class PromotionManagement {
 			System.out.print("1. Them san pham\n" + "2. Tim kiem\n" + "3. Them khuyen mai\n"
 					+ "4. Xoa khuyen mai het han\n" + "5. Nhap so ngay kiem tra khuyen mai sap het han\n"
 					+ "6. Hien thi thong tin khuyen mai\n" + "7. Tra cuu san pham theo khuyen mai\n"
-					+ "8. Sap xep san pham\n" + "9. Hien thi thong tin tat ca san pham\n"
-							+ "0. Thoat\n" + "Chon: ");
+					+ "8. Sap xep san pham\n" + "9. Hien thi thong tin tat ca san pham\n" + "0. Thoat\n" + "Chon: ");
 			int chose = Integer.parseInt(Promotion.sc.nextLine());
 			switch (chose) {
 			case 1: {
@@ -129,8 +128,8 @@ public class PromotionManagement {
 						begin = Integer.parseInt(Promotion.sc.nextLine());
 						System.out.println("Den: ");
 						end = Integer.parseInt(Promotion.sc.nextLine());
-						List<Product> rs = this.search(begin, end); 
-						if(rs.isEmpty())
+						List<Product> rs = this.search(begin, end);
+						if (rs.isEmpty())
 							System.out.println("+ Khong co san pham!");
 						else
 							rs.forEach(p -> p.show());
@@ -145,7 +144,7 @@ public class PromotionManagement {
 							switch (chose) {
 							case 1: {
 								rs = this.searchProm("deTai6.PromotionA");
-								if(!rs.isEmpty())
+								if (!rs.isEmpty())
 									rs.forEach(h -> h.show());
 								else
 									System.out.println("+ Khong co san pham");
@@ -153,7 +152,7 @@ public class PromotionManagement {
 							}
 							case 2: {
 								rs = this.searchProm("deTai6.PromotionB");
-								if(!rs.isEmpty())
+								if (!rs.isEmpty())
 									rs.forEach(h -> h.show());
 								else
 									System.out.println("+ Khong co san pham");
@@ -161,7 +160,7 @@ public class PromotionManagement {
 							}
 							case 3: {
 								rs = this.searchProm("deTai6.PromotionC");
-								if(!rs.isEmpty())
+								if (!rs.isEmpty())
 									rs.forEach(h -> h.show());
 								else
 									System.out.println("+ Khong co san pham");
@@ -172,6 +171,7 @@ public class PromotionManagement {
 							if (chose > 0 || chose < 4)
 								break;
 						}
+
 						break;
 					}
 
@@ -185,42 +185,82 @@ public class PromotionManagement {
 				break;
 			}
 			case 3: {
+				if (this.listProd.isEmpty()) {
+					System.out.println("Vui long tao san pham truoc\n");
+					break;
+				}
 				System.out.println("Id \t Name");
 				this.listProd.forEach(p -> System.out.println(p.getId() + "\t" + p.getName()));
 				System.out.println("Chon san pham theo Id: ");
-				chose = Integer.parseInt(Promotion.sc.nextLine());
+				do {
+					chose = Integer.parseInt(Promotion.sc.nextLine());
+				} while (chose < 1 || chose > this.listProd.size());
+
 				boolean isId = true;
 				while (true) {
-					Promotion p;
-					while (true) {
-						System.out.println("Chon loai khuyen mai\n" + "1. Khuyen mai A\n" + "2. Khuyen mai B\n"
-								+ "3. Khuyen mai C\n" + "Chon: ");
-						int chose2 = Integer.parseInt(Promotion.sc.nextLine());
-						switch (chose2) {
-						case 1:
-							p = new PromotionA();
+					Promotion p = null;
+					System.out.println("1. Them khuyen mai da co\n" + "2. Them khuyen mai moi\n" + "Chon: ");
+					int chon = Integer.parseInt(Promotion.sc.nextLine());
+					switch (chon) {
+					case 1:
+						if (this.listProm.isEmpty()) {
+							System.out.println("Danh sach khuyen mai rong\n");
 							break;
-						case 2:
-							p = new PromotionB();
-							break;
-						case 3:
-							p = new PromotionC();
-							break;
-						default:
-							throw new IllegalArgumentException("Unexpected value: " + chose);
 						}
-						if (chose > 0 || chose < 4)
-							break;
-					}
-					for (Product x : listProd) {
-						if (x.getId() == chose) {
-							x.addPromotion(p);
-							System.out.println("Them thanh cong");
+						int count = 0;
+						for (Promotion x : this.listProm) {
+							System.out.println(++count + "\n");
 							x.show();
-							x.viewProm();
-							isId = false;
 						}
+						System.out.println("Chon KM muon them theo so thu tu: ");
+						int chose3 = 0;
+						do {
+							chose3 = Integer.parseInt(Promotion.sc.nextLine());
+						} while (chose3 < 1 || chose3 > count);
+						count = 0;
+						for (Promotion x : this.listProm) {
+							count++;
+							if (count == chose3)
+								p = x;
+						}
+						break;
+
+					case 2:
+						while (true) {
+							System.out.println("Chon loai khuyen mai\n" + "1. Khuyen mai A\n" + "2. Khuyen mai B\n"
+									+ "3. Khuyen mai C\n" + "Chon: ");
+							int chose2 = Integer.parseInt(Promotion.sc.nextLine());
+							switch (chose2) {
+							case 1:
+								p = new PromotionA();
+								break;
+							case 2:
+								p = new PromotionB();
+								break;
+							case 3:
+								p = new PromotionC();
+								break;
+							default:
+								throw new IllegalArgumentException("Unexpected value: " + chose);
+							}
+							if (chose > 0 || chose < 4) {
+								this.addPromotion(p);
+								break;
+							}
+						}
+						break;
 					}
+					if (p != null)
+						for (Product x : listProd) {
+							if (x.getId() == chose) {
+								x.addPromotion(p);
+
+								System.out.println("Them thanh cong");
+								x.show();
+								x.viewProm();
+								isId = false;
+							}
+						}
 					if (!isId) {
 						break;
 					}
@@ -309,6 +349,7 @@ public class PromotionManagement {
 			}
 			case 0: {
 				exit = true;
+				System.out.println("Thoat chuong trinh\n");
 				break;
 			}
 			default:
